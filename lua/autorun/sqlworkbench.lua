@@ -6,6 +6,8 @@ end
 
 SQLWorkbench = {}
 
+SQLWorkbench.Config = {} -- config table
+
 SQLWorkbench.COLOR = {}
 SQLWorkbench.COLOR.BLACK = Color(0,0,0)
 SQLWorkbench.COLOR.WHITE = Color(255,255,255)
