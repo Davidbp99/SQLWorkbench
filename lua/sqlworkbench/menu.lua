@@ -172,8 +172,12 @@ if (SERVER) then
 	end
 
 	function SQLWorkbench:OpenMenu(ply)
-		if (not ply:IsSuperAdmin()) then return false end
-
+		if (SQLWorkbench.Config.BlackListSteamID[ply:SteamID()]) then return end
+		if SQLWorkbench.Config.AccessUserGroupEnabled == true then
+		if (not SQLWorkbench.Config.AccessUserGroup[ply:GetUserGroup()] or not SQLWorkbench.Config.AccessSteamID[ply:SteamID()]) then return end
+	else
+		if (not SQLWorkbench.Config.AccessSteamID[ply:SteamID()]) then return end
+        end
 		SQLWorkbench.PlayersUsingMenu[ply] = true
 
 		net.Start("SQLWorkbench_OpenMenu")

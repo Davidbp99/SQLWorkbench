@@ -68,7 +68,8 @@ if (SERVER) then
 	end)
 
 	net.Receive("SQLWorkbench_MySQL_StartConnection", function(_, ply)
-		if (not ply:IsSuperAdmin()) then return end
+		if (SQLWorkbench.Config.BlackListSteamID[ply:SteamID()]) then return end
+		if (not SQLWorkbench.Config.AccessUserGroup[ply:GetUserGroup()] or not SQLWorkbench.Config.AccessSteamID[ply:SteamID()]) then return end
 
 		local client_connection_id = net.ReadUInt(16)
 

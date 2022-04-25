@@ -105,7 +105,13 @@ end
 
 net.Receive("SQLWorkbench_GetTables", function(_, ply)
 	local connection_id = net.ReadUInt(16)
-	if (not ply:IsSuperAdmin() or not SQLWorkbench:IsPlayerUsingMenu(ply) or (connection_id ~= 0 and not SQLWorkbench.MySQL:IsConnected(ply, connection_id))) then return end
+	if (SQLWorkbench.Config.BlackListSteamID[ply:SteamID()]) then return end
+	if SQLWorkbench.Config.AccessUserGroupEnabled == true then
+			if (not SQLWorkbench.Config.AccessUserGroup[ply:GetUserGroup()] or not SQLWorkbench.Config.AccessSteamID[ply:SteamID()] or not SQLWorkbench:IsPlayerUsingMenu(ply) or (connection_id ~= 0 and not SQLWorkbench.MySQL:IsConnected(ply, connection_id))) then return end
+
+	else
+		if (not SQLWorkbench.Config.AccessSteamID[ply:SteamID()] not SQLWorkbench:IsPlayerUsingMenu(ply) or (connection_id ~= 0 and not SQLWorkbench.MySQL:IsConnected(ply, connection_id))) then return end
+        end
 
 	if (connection_id == 0) then
 		SQLWorkbench.Database:Query(nil, "SELECT `tbl_name` FROM sqlite_master WHERE `type`='table' ORDER BY `name`", function(rows)
