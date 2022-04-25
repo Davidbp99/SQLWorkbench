@@ -48,7 +48,7 @@ To open the menu, first make sure you are a super admin, and then either:
 * Uses the [Ace embedded code editor](https://ace.c9.io), and works offline without a need for JavaScript CDNs
 
 **New from Davidbp99**
-* **New** SteamID Blacklist people you don't like or trust to access the SQL system
+* **New** SteamID Blacklist people you don't like or trust to access the SQL system. So meaning if they are part of the steamid or rank table somehow they can't do anything still.
 * **New** SteamID Access you can give access to just the people you like/trust. No need to have them as superadmins etc.
 * **New** UserGroup Table access. Instead of locking it behind just IsSuperAdmin() you can now add other user groups to access the system **just give it to people you trust**
 
